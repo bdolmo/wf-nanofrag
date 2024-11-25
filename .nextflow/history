@@ -1,0 +1,35 @@
+2024-11-18 12:34:51	-	loquacious_swirles	-	f55ba499685721ade6d5d3c8938f0580	06780b59-25ba-404e-83ad-35634d825758	nextflow main.nf
+2024-11-18 12:37:29	-	ridiculous_hodgkin	-	77fc20dc0a966b93711455595c3632d6	a72f0424-cecc-46a1-b466-e165c2120d50	nextflow main.nf
+2024-11-18 12:38:34	-	voluminous_lamarck	-	515b85ffec68ab8a5b0c4a1f06ffc8a3	e8bba491-4d8b-4c62-8742-53be9aa69135	nextflow main.nf
+2024-11-18 12:41:50	9s	loving_cantor	OK	632d8b53dee1a2b6ed8d3f17e885c1e6	73f20c6b-08a3-4978-8334-9aacfe1397cb	nextflow main.nf
+2024-11-18 12:42:44	9.8s	modest_goldwasser	OK	632d8b53dee1a2b6ed8d3f17e885c1e6	7395cd77-18a0-4973-b707-f5ae93d7e450	nextflow main.nf --help
+2024-11-18 12:45:57	-	awesome_rutherford	-	e6bde516b52e55b626ab883ac29702ec	cbfd88b8-83a5-495f-82c0-397e779fa559	nextflow main.nf --help
+2024-11-18 12:47:27	21.6s	special_morse	ERR	e6bde516b52e55b626ab883ac29702ec	b7a56b9a-97b6-47ff-97aa-7c8ce9293c80	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --outdir /home/minion/Desktop/test_wf
+2024-11-18 12:52:16	16.2s	spontaneous_northcutt	ERR	e6bde516b52e55b626ab883ac29702ec	69629a91-5b08-4a2f-a800-e3c9a991e9ce	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --outdir /home/minion/Desktop/test_wf
+2024-11-18 12:53:45	17.8s	condescending_wilson	ERR	e6c2f1f11c4cb864fa0ad2871238a081	df241aa8-3cce-44d1-af44-55f9d8ca5872	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --outdir /home/minion/Desktop/test_wf
+2024-11-18 13:40:14	11.7s	mad_brattain	ERR	e6c2f1f11c4cb864fa0ad2871238a081	e1dda605-479b-4bbe-9c77-738655c30ae5	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --outdir /home/minion/Desktop/test_wf
+2024-11-18 13:41:16	12s	hungry_pauling	ERR	1a6263521f271d49ae9a73ec3a8e8096	a8e86e47-707e-4d07-815f-340304c83087	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --outdir /home/minion/Desktop/test_wf
+2024-11-18 13:48:04	13s	determined_albattani	ERR	2120e91393223f88963d5baedd9df80f	d21b1aa9-1eab-4548-b4c5-30e040d14c11	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --outdir /home/minion/Desktop/test_wf
+2024-11-18 13:52:24	11.4s	scruffy_lovelace	ERR	56004c7ac99122f15cb19951bc815670	b018c44d-2044-4132-8beb-dbb3ad1b7c9e	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 13:53:57	9.2s	lonely_khorana	ERR	bac9d12b41325306a7b67b890dc989c9	44781edc-8c5f-4a2e-824d-89b7ba3bb2e2	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 13:54:46	11.6s	loquacious_dijkstra	ERR	e00aec30a13c05f9e6dd73a42dde0908	74570394-2729-447e-a805-e72219e9d487	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 13:59:47	2h 9m 50s	silly_galileo	ERR	9d90fea083347ec2566e56a4d87498a7	3761d9f1-655e-451c-90c3-7b6c42d9a0fc	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 14:00:34	12.9s	nasty_murdock	ERR	f988f6fd56724919a7e679cb39c4cd32	07924dc7-653e-4c0c-ba41-0b71a6332c85	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 14:01:37	11s	sharp_poisson	ERR	a881a788d0102c3c7dc82d0f8e9bc698	a51883fb-91ee-4fae-92bc-5864978238c4	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 14:02:23	11.9s	gigantic_lamarr	OK	9bc22ff9c6372399acf0190a7c38be9f	e9fa50d1-f194-4879-881c-bec6470b330e	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 14:05:22	12.3s	cheeky_celsius	ERR	68d6c6b75b57952ebc60ebc558232db1	8d01f8eb-8960-4f6f-99ad-5fe099305d02	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 14:16:41	-	small_kirch	-	78bfcbed82a33d0f68f23c67d879feb7	457e0e2f-37d9-4dd3-be62-f6350fb26f99	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 14:17:43	9.5s	loving_mccarthy	OK	1947957e2e900fbc29f97f5bd9e835c1	45e039ea-0117-4344-a8d0-8b35c0ae3631	nextflow main.nf --bam_dir test_data/ --outdir /home/minion/Desktop/test_wf
+2024-11-18 14:21:17	10s	grave_austin	OK	1947957e2e900fbc29f97f5bd9e835c1	b32814fc-1f73-42e5-b060-70619e92f39f	nextflow main.nf --bam_dir test_data/ --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:24:15	10.1s	berserk_goldwasser	OK	1a832b882d02b26383f0fe8625c39e87	cf48c4c2-1cb2-440c-a811-6f9546fd0fc9	nextflow main.nf --bam_dir test_data/ --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:25:43	9.3s	tender_leibniz	OK	1a832b882d02b26383f0fe8625c39e87	42a77b00-8c8f-4833-aafd-5a278ccb0120	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:28:41	-	drunk_tuckerman	-	c6c3ebd82de6ee20e2294838fbf77e0d	5f1fd4ad-8d51-4b57-8da4-c3797e3c918b	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:29:25	-	sick_monod	-	3795ebd90e687b563d15c8576c7c1de4	52be5164-a487-4157-a9de-762ab725e4c7	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:31:04	9.4s	reverent_meitner	OK	076dc7c682551e9864f2dfff74543994	cf99c065-7b27-44aa-88a3-4bc6f078a393	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:44:28	10.3s	nasty_hoover	OK	3adf39eb6cb45bbb0e90924e15566034	23131592-f1e7-45ed-80e8-d88c24d0bfb3	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:45:25	9.5s	lonely_volta	OK	a21ec2a8c62e30436141a99e8a91e558	17c70884-6869-4a22-9e16-a0238ae97571	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:48:02	10s	elated_descartes	ERR	27e5542b165b5ed5eb6e883e63835993	8726bad4-824c-4d41-b209-77e5794c2098	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+2024-11-18 14:50:26	13.2s	ridiculous_euler	ERR	27e5542b165b5ed5eb6e883e63835993	9531a9ae-6c92-4a33-9ab6-182f2863ba9e	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428
+2024-11-18 14:55:26	13.9s	extravagant_bassi	ERR	132aaca0262a6597526fad8056db32ae	2196741d-749f-4363-b456-b05451d41495	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428
+2024-11-18 15:01:50	10.2s	chaotic_lattes	ERR	132aaca0262a6597526fad8056db32ae	6ad3f265-c16e-4045-8893-3eaf2606ae56	nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf2
+2024-11-22 14:07:34	26m 33s	hopeful_avogadro	ERR	07c669387fc9d58a034109e6c82a1c5b	b104e7de-45c5-475e-ae1a-2c89ae6916ff	nextflow main.nf --tumor_list /home/minion/Desktop/tumor_bams.txt --normal_list /home/minion/Desktop/normal_bams.txt --reference /home/minion/Desktop/GRCh38.p14.genome.fa --out_dir /home/minion/Desktop/test_wf2 --threads 8 --skip_small_variants

@@ -1,0 +1,18 @@
+components:
+  schemas:
+    WorkflowResult:
+      type: object
+      description: Results returned by this BAM-to-FASTQ conversion workflow.
+      required:
+        - workflow_pass
+        - converted_files
+      properties:
+        workflow_pass:
+          type: boolean
+          description: True if all BAM files were successfully converted to FASTQ
+        converted_files:
+          type: array
+          description: A list of paths to the converted FASTQ files
+          items:
+            type: string
+            description: Path to the output FASTQ file

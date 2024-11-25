@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://example.com/bam_to_fastq/output_definitions.json",
+    "title": "bam-to-fastq",
+    "workflow_title": "BAM to FASTQ Conversion Workflow",
+    "description": "A Nextflow workflow for converting BAM files to FASTQ using samtools.",
+    "type": "object",
+    "definitions": {
+        "input": {
+            "title": "Input Options",
+            "type": "object",
+            "fa_icon": "fas fa-arrow-right",
+            "description": "Parameters for specifying the input BAM files.",
+            "properties": {
+                "bam_dir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "title": "BAM Directory",
+                    "description": "Directory containing BAM files to convert to FASTQ.",
+                    "help_text": "Specify the directory that contains the BAM files to be processed."
+                }
+            },
+            "required": [
+                "bam_dir"
+            ]
+        },
+        "output": {
+            "title": "Output Options",
+            "type": "object",
+            "fa_icon": "fas fa-arrow-left",
+            "description": "Parameters for saving workflow outputs.",
+            "properties": {
+                "out_dir": {
+                    "type": "string",
+                    "default": "output",
+                    "format": "directory-path",
+                    "description": "Directory for output of FASTQ files."
+                }
+            }
+        },
+        "misc": {
+            "title": "Miscellaneous Options",
+            "type": "object",
+            "description": "Additional workflow options.",
+            "default": "",
+            "properties": {
+                "disable_ping": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable to prevent sending a workflow ping."
+                },
+                "help": {
+                    "type": "boolean",
+                    "description": "Display help text.",
+                    "fa_icon": "fas fa-question-circle",
+                    "default": false,
+                    "hidden": true
+                },
+                "version": {
+                    "type": "boolean",
+                    "description": "Display version and exit.",
+                    "fa_icon": "fas fa-question-circle",
+                    "default": false,
+                    "hidden": true
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/input"
+        },
+        {
+            "$ref": "#/definitions/output"
+        },
+        {
+            "$ref": "#/definitions/misc"
+        }
+    ],
+    "resources": {
+        "recommended": {
+            "cpus": 2,
+            "memory": "2GB"
+        },
+        "minimum": {
+            "cpus": 2,
+            "memory": "2GB"
+        },
+        "run_time": "5 minutes per BAM file"
+    }
+}
+
