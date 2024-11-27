@@ -3,8 +3,8 @@
 nextflow.enable.dsl = 2
 
 // Define parameters for input/output directories and paths
-params.tumor_list = null                                        // Path to tumor BAM list (txt file)
-params.normal_list = null                                       // Path to normal BAM list (txt file)
+params.tumor = null                                        // Path to tumor BAM list (txt file)
+params.normal = null                                       // Path to normal BAM list (txt file)
 params.reference = null                                         // Path to the reference genome (FASTA file)
 params.out_dir = "./nanofrag_results"                          // Directory to save output metrics
 params.threads = 12                                             // Number of threads
@@ -15,10 +15,10 @@ if (params.help) {
     Nanofrag Analysis
     =============================================
     Usage:
-        nextflow run main.nf --tumor_list <file> --normal_list <file> --reference <file> --out_dir <dir> --threads <number>
+        nextflow run main.nf --tumor <file> --normal <file> --reference <file> --out_dir <dir> --threads <number>
     Input:
-        * --tumor_list: path to the text file listing tumor BAM files
-        * --normal_list: path to the text file listing normal BAM files
+        * --tumor: directory with BAM files
+        * --normal: directory with normal BAM files
         * --reference: path to the reference genome (FASTA file)
         * --out_dir: output directory. Default [${params.out_dir}]
         * --threads: number of threads. Default [${params.threads}]
@@ -28,8 +28,8 @@ if (params.help) {
 }
 
 // Ensure mandatory parameters are provided
-if (!params.tumor_list || !params.normal_list || !params.reference) {
-    throw new IllegalArgumentException("Missing required parameters: --tumor_list, --normal_list, or --reference")
+if (!params.tumor || !params.normal || !params.reference) {
+    throw new IllegalArgumentException("Missing required parameters: --tumor, --normal, or --reference")
 }
 
 // Ensure the output directory exists
@@ -38,23 +38,23 @@ if (!new File(params.out_dir).exists()) {
 }
 
 // Create channels for inputs
-tumor_list = Channel.fromPath(params.tumor_list)
-normal_list = Channel.fromPath(params.normal_list)
+tumor_list = Channel.fromPath(params.tumor)
+normal_list = Channel.fromPath(params.normal)
 reference = Channel.fromPath(params.reference)
 
 
 
-def tumor_input = file(params.tumor_list)
-def normal_input = file(params.normal_list)
+def tumor_input = file(params.tumor)
+def normal_input = file(params.normal)
 def ref_input = file(params.reference)
 
 
-def tumor_basename = file(params.tumor_list).getBaseName()
-def normal_basename = file(params.normal_list).getBaseName()
+def tumor_basename = file(params.tumor).getBaseName()
+def normal_basename = file(params.normal)getBaseName()
 def ref_basename = file(params.reference).getBaseName()
 
-def tumor_dirname = file(params.tumor_list).parent 
-def normal_dirname = file(params.normal_list).parent 
+def tumor_dirname = file(params.tumor).parent 
+def normal_dirname = file(params.normal).parent 
 def ref_dirname = file(params.reference).parent 
 
 
@@ -78,8 +78,8 @@ process runNanofrag {
     echo "Running Nanofrag using docker run command..."
     docker run  -i --rm \\
         -v ${nanofrag_dir}/:/nanofrag_script/ \\
-        -v ${params.tumor_list}/:/tumors/ \\
-        -v ${params.normal_list}/:/normals/ \\
+        -v ${params.tumor}/:/tumors/ \\
+        -v ${params.normal}/:/normals/ \\
         -v ${params.reference}/:/ref_dir/\\
         -v ${params.out_dir}:/out_dir/ \\
         bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\

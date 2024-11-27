@@ -1,28 +1,40 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://example.com/nextflow_schema.json",
-    "title": "bam-to-fastq",
-    "workflow_title": "BAM to FASTQ Conversion Workflow",
-    "description": "A Nextflow workflow for converting BAM files to FASTQ using samtools.",
+    "$id": "https://example.com/nanofrag_schema.json",
+    "title": "wf-nanofrag",
+    "workflow_title": "Nanofrag Analysis Workflow",
+    "description": "A Nextflow workflow for fragmentation and methylation analysis using Nanofrag.",
     "type": "object",
     "definitions": {
         "input": {
             "title": "Input Options",
             "type": "object",
             "fa_icon": "fas fa-arrow-right",
-            "description": "Parameters for specifying the input BAM files.",
+            "description": "Parameters for specifying input files.",
             "properties": {
-                "bam_dir": {
+                "tumor": {
                     "type": "string",
                     "format": "directory-path",
-                    "title": "BAM Directory",
-                    "description": "Directory containing BAM files to convert to FASTQ.",
-                    "help_text": "Specify the directory that contains the BAM files to be processed."
+                    "title": "Tumor BAM directory",
+                    "description": "Path to a directory with tumor BAM files.",
+                    "help_text": "Provide a path to a directory with tumor BAM files."
+                },
+                "normal": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "title": "Normal BAM directory",
+                    "description": "Path to a directory with normal BAM files.",
+                    "help_text": "Provide a path to a directory with normal BAM files."
+                },
+                "reference": {
+                    "type": "string",
+                    "format": "file-path",
+                    "title": "Reference Genome",
+                    "description": "Path to the reference genome file in FASTA format.",
+                    "help_text": "Provide the reference genome file."
                 }
             },
-            "required": [
-                "bam_dir"
-            ]
+            "required": ["tumor", "normal", "reference"]
         },
         "output": {
             "title": "Output Options",
@@ -32,9 +44,31 @@
             "properties": {
                 "out_dir": {
                     "type": "string",
-                    "default": "output",
+                    "default": "./nanofrag_results",
                     "format": "directory-path",
-                    "description": "Directory for output of FASTQ files."
+                    "title": "Output Directory",
+                    "description": "Directory where output files will be saved.",
+                    "help_text": "Specify the output directory for results."
+                }
+            }
+        },
+        "resources": {
+            "title": "Resource Options",
+            "type": "object",
+            "description": "Compute resource allocation.",
+            "properties": {
+                "threads": {
+                    "type": "integer",
+                    "default": 12,
+                    "minimum": 1,
+                    "title": "Threads",
+                    "description": "Number of threads to use for the workflow."
+                },
+                "memory": {
+                    "type": "string",
+                    "default": "12GB",
+                    "title": "Memory",
+                    "description": "Memory allocation for the workflow."
                 }
             }
         },
@@ -42,57 +76,44 @@
             "title": "Miscellaneous Options",
             "type": "object",
             "description": "Additional workflow options.",
-            "default": "",
             "properties": {
-                "disable_ping": {
+                "skip_small_variants": {
                     "type": "boolean",
-                    "default": false,
-                    "description": "Enable to prevent sending a workflow ping."
+                    "default": true,
+                    "title": "Skip Small Variants",
+                    "description": "Enable this flag to skip processing small variants."
                 },
                 "help": {
                     "type": "boolean",
-                    "description": "Display help text.",
-                    "fa_icon": "fas fa-question-circle",
                     "default": false,
-                    "hidden": true
-                },
-                "version": {
-                    "type": "boolean",
-                    "description": "Display version and exit.",
-                    "fa_icon": "fas fa-question-circle",
-                    "default": false,
-                    "hidden": true
+                    "title": "Help",
+                    "description": "Display help text for the workflow."
                 }
             }
         }
     },
     "allOf": [
-        {
-            "$ref": "#/definitions/input"
-        },
-        {
-            "$ref": "#/definitions/output"
-        },
-        {
-            "$ref": "#/definitions/misc"
-        }
+        { "$ref": "#/definitions/input" },
+        { "$ref": "#/definitions/output" },
+        { "$ref": "#/definitions/resources" },
+        { "$ref": "#/definitions/misc" }
     ],
     "properties": {
         "validate_params": {
             "type": "boolean",
-            "default": true
+            "default": true,
+            "description": "Enable parameter validation before execution."
         }
     },
     "resources": {
         "recommended": {
-            "cpus": 2,
-            "memory": "2GB"
+            "cpus": 12,
+            "memory": "12GB"
         },
         "minimum": {
-            "cpus": 2,
-            "memory": "2GB"
+            "cpus": 4,
+            "memory": "8GB"
         },
-        "run_time": "5 minutes per BAM file"
+        "run_time": "Variable based on input size and parameters."
     }
 }
-
