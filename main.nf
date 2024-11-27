@@ -42,11 +42,29 @@ tumor_list = Channel.fromPath(params.tumor_list)
 normal_list = Channel.fromPath(params.normal_list)
 reference = Channel.fromPath(params.reference)
 
+
+
+def tumor_input = file(params.tumor_list)
+def normal_input = file(params.normal_list)
+def ref_input = file(params.reference)
+
+
+def tumor_basename = file(params.tumor_list).getBaseName()
+def normal_basename = file(params.normal_list).getBaseName()
+def ref_basename = file(params.reference).getBaseName()
+
+def tumor_dirname = file(params.tumor_list).parent 
+def normal_dirname = file(params.normal_list).parent 
+def ref_dirname = file(params.reference).parent 
+
+
+def nanofrag_dir = file(params.nanofrag).parent
+
+
 process runNanofrag {
     tag "nanofrag"
     memory '12 GB'
     cpus params.threads
-    conda params.conda_yaml
 
     input:
     path tumor_list
@@ -57,16 +75,53 @@ process runNanofrag {
 
     script:
     """
-    echo "Running Nanofrag with tumor list ${tumor_list}, normal list ${normal_list}, and reference genome ${reference}..."
-    python3 ${projectDir}/bin/nanofrag/nanofrag.py \\
-        --tumor_list ${tumor_list} \\
-        --normal_list ${normal_list} \\
-        --reference ${reference} \\
-        --output_dir . \\
-        --threads ${params.threads} \\
+    echo "Running Nanofrag using docker run command..."
+    docker run  -i --rm \\
+        -v ${nanofrag_dir}/:/nanofrag_script/ \\
+        -v ${params.tumor_list}/:/tumors/ \\
+        -v ${params.normal_list}/:/normals/ \\
+        -v ${params.reference}/:/ref_dir/\\
+        -v ${params.out_dir}:/out_dir/ \\
+        bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\
+        --tumor_list /tumors/ \\
+        --normal_list /normals/ \\
+        --reference /ref_dir/ \\
+        --output_dir /out_dir/ \\
+        --threads ${task.cpus} \\
         ${params.skip_small_variants ? '--skip_small_variants' : ''}
     """
 }
+
+
+// process runNanofrag {
+//     tag "nanofrag"
+//     memory '12 GB'
+//     cpus params.threads
+//     docker bdolmo/python_env_nanofrag
+
+//     input:
+//     path tumor_list
+//     path normal_list
+//     path reference
+
+//     output:
+
+//     script:
+//     """
+//     # conda env create -f ${params.conda_yaml}
+//     # source activate base
+//     # conda init
+//     # conda activate nanofrag_env
+//     echo "Running Nanofrag with tumor list ${tumor_list}, normal list ${normal_list}, and reference genome ${reference}..."
+//     nanofrag.py \\
+//         --tumor_list ${tumor_list} \\
+//         --normal_list ${normal_list} \\
+//         --reference ${reference} \\
+//         --output_dir . \\
+//         --threads ${params.threads} \\
+//         ${params.skip_small_variants ? '--skip_small_variants' : ''}
+//     """
+// }
 
 // Workflow definition
 workflow {
