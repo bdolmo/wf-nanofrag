@@ -6,6 +6,6 @@ Worfklow to run nanofrag pipeline for cfDNA profiling with nanopore sequencing
 
 ### Usage
 ```
-nextflow wf-nanofrag/main.nf --tumor_list tumor_bams.txt --normal_list normal_bams.txt --reference GRCh38.p14.genome.fa --out_dir output_dir  --threads 8
+nextflow wf-nanofrag/main.nf --tumor /path/to/tumor/bams --normal_list /path/to/normal/bams --reference /path/to/normal/genome.fasta--out_dir output_dir --threads 8
 
 ```
