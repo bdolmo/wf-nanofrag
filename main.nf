@@ -80,7 +80,7 @@ process runNanofrag {
         -v ${nanofrag_dir}/:/nanofrag_script/ \\
         -v ${params.tumor}/:/tumors/ \\
         -v ${params.normal}/:/normals/ \\
-        -v ${params.reference}:/ref_dir/\\
+        -v ${params.reference}/:/ref_dir/\\
         -v ${params.out_dir}:/out_dir/ \\
         bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\
         --tumor_list /tumors/ \\
