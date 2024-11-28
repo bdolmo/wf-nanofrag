@@ -62,8 +62,8 @@ def nanofrag_dir = file(params.nanofrag).parent
 
 
 def tumor_input_str = params.tumor.replaceAll("\\s", "\\ ")
-def normal_input_str = params.tumor.replaceAll("\\s", "\\ ")
-def ref_input_str = params.tumor.replaceAll("\\s", "\\ ")
+def normal_input_str = params.normal.replaceAll("\\s", "\\ ")
+def ref_input_str = params.reference.replaceAll("\\s", "\\ ")
 
 process runNanofrag {
     tag "nanofrag"
