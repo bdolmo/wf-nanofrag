@@ -67,9 +67,9 @@ process runNanofrag {
     cpus params.threads
 
     input:
-    path tumor_list
-    path normal_list
-    path reference
+    // path tumor_list
+    // path normal_list
+    // path reference
 
     output:
 
@@ -126,7 +126,7 @@ process runNanofrag {
 
 // Workflow definition
 workflow {
-    runNanofrag(tumor_list, normal_list, reference)
+    runNanofrag()
 }
 
 workflow.onComplete {
