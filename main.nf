@@ -44,8 +44,8 @@ reference = Channel.fromPath(params.reference)
 
 
 
-def tumor_input = file(params.tumor, stageAs:"tumor_path").replaceAll("\\s", "\\ ")
-def normal_input = file(params.normal, stageAs:"normals_path").replaceAll("\\s", "\\ ")
+def tumor_input = file(params.tumor, stageAs:"tumor_path")
+def normal_input = file(params.normal, stageAs:"normals_path")
 def ref_input = file(params.reference, stageAs:"reference_path")
 
 
@@ -78,8 +78,8 @@ process runNanofrag {
     echo "Running Nanofrag using docker run command..."
     docker run  -i --rm \\
         -v ${nanofrag_dir}/:/nanofrag_script/ \\
-        -v ${normal_input}/:/tumors/ \\
-        -v ${params.normal}/:/normals/ \\
+        -v ${tumor_input}/:/tumors/ \\
+        -v ${normal_inputl}/:/normals/ \\
         -v ${params.reference}/:/ref_dir/\\
         -v ${params.out_dir}:/out_dir/ \\
         bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\
