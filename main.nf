@@ -83,6 +83,7 @@ process runNanofrag {
         -v ${params.reference}/:/ref_dir/\\
         -v ${params.out_dir}:/out_dir/ \\
         bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\
+        --docker_output ${params.out_dir}
         --tumor_list /tumors/ \\
         --normal_list /normals/ \\
         --reference /ref_dir/ \\
