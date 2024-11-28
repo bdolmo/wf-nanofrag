@@ -61,6 +61,10 @@ def ref_dirname = file(params.reference).parent
 def nanofrag_dir = file(params.nanofrag).parent
 
 
+def tumor_input_str = params.tumor.replaceAll("\\s", "\\ ")
+def normal_input_str = params.tumor.replaceAll("\\s", "\\ ")
+def ref_input_str = params.tumor.replaceAll("\\s", "\\ ")
+
 process runNanofrag {
     tag "nanofrag"
     memory '12 GB'
@@ -78,9 +82,9 @@ process runNanofrag {
     echo "Running Nanofrag using docker run command..."
     docker run  -i --rm \\
         -v ${nanofrag_dir}/:/nanofrag_script/ \\
-        -v ${tumor_input}/:/tumors/ \\
-        -v ${normal_input}/:/normals/ \\
-        -v ${params.reference}/:/ref_dir/\\
+        -v ${tumor_input_str}/:/tumors/ \\
+        -v ${normal_input_str}/:/normals/ \\
+        -v ${ref_input_str}/:/ref_dir/\\
         -v ${params.out_dir}:/out_dir/ \\
         bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\
         --docker_output ${params.out_dir} \\
