@@ -79,7 +79,7 @@ process runNanofrag {
     docker run  -i --rm \\
         -v ${nanofrag_dir}/:/nanofrag_script/ \\
         -v ${tumor_input}/:/tumors/ \\
-        -v ${normal_inputl}/:/normals/ \\
+        -v ${normal_input}/:/normals/ \\
         -v ${params.reference}/:/ref_dir/\\
         -v ${params.out_dir}:/out_dir/ \\
         bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\
