@@ -44,9 +44,9 @@ reference = Channel.fromPath(params.reference)
 
 
 
-def tumor_input = file(params.tumor)
-def normal_input = file(params.normal)
-def ref_input = file(params.reference)
+def tumor_input = file(params.tumor, stageAs:"tumor_path")
+def normal_input = file(params.normal, stageAs:"normals_path")
+def ref_input = file(params.reference, stageAs:"reference_path")
 
 
 def tumor_basename = file(params.tumor).getBaseName()
@@ -78,7 +78,7 @@ process runNanofrag {
     echo "Running Nanofrag using docker run command..."
     docker run  -i --rm \\
         -v ${nanofrag_dir}/:/nanofrag_script/ \\
-        -v ${params.tumor}/:/tumors/ \\
+        -v ${normal_input}/:/tumors/ \\
         -v ${params.normal}/:/normals/ \\
         -v ${params.reference}/:/ref_dir/\\
         -v ${params.out_dir}:/out_dir/ \\
