@@ -44,8 +44,8 @@ reference = Channel.fromPath(params.reference)
 
 
 
-def tumor_input = file(params.tumor, stageAs:"tumor_path")
-def normal_input = file(params.normal, stageAs:"normals_path")
+def tumor_input = file(params.tumor, stageAs:"tumor_path").replaceAll("\\s", "\\ ")
+def normal_input = file(params.normal, stageAs:"normals_path").replaceAll("\\s", "\\ ")
 def ref_input = file(params.reference, stageAs:"reference_path")
 
 
