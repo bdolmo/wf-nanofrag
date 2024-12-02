@@ -55,7 +55,7 @@ process runNanofrag {
 
     script:
     """
-    python3.12 nanofrag.py \\
+    python3.12 /opt/nanofrag/nanofrag.py \\
         --docker_output ${params.out_dir} \\
         --tumor_list ${tumor_dir} \\
         --normal_list ${normal_dir} \\
