@@ -3,21 +3,21 @@
 nextflow.enable.dsl = 2
 
 // Define parameters for input/output directories and paths
-params.tumor = null                                        // Path to tumor BAM list (txt file)
-params.normal = null                                       // Path to normal BAM list (txt file)
-params.reference = null                                         // Path to the reference genome (FASTA file)
-params.out_dir = "./nanofrag_results"                          // Directory to save output metrics
-params.threads = 12                                             // Number of threads
-params.skip_small_variants = true                              // Whether to skip small variants (flag)
+params.tumor = null                                        // Path to tumor BAM directory
+params.normal = null                                       // Path to normal BAM directory
+params.reference = null                                    // Path to the reference genome (FASTA file)
+params.out_dir = "./nanofrag_results"                     // Directory to save output metrics
+params.threads = 4                                        // Number of threads
+params.skip_small_variants = true                         // Whether to skip small variants (flag)
 
 if (params.help) {
     log.info """
     Nanofrag Analysis
     =============================================
     Usage:
-        nextflow run main.nf --tumor <file> --normal <file> --reference <file> --out_dir <dir> --threads <number>
+        nextflow run main.nf --tumor <directory> --normal <directory> --reference <file> --out_dir <dir> --threads <number>
     Input:
-        * --tumor: directory with BAM files
+        * --tumor: directory with tumor BAM files
         * --normal: directory with normal BAM files
         * --reference: path to the reference genome (FASTA file)
         * --out_dir: output directory. Default [${params.out_dir}]
@@ -37,33 +37,10 @@ if (!new File(params.out_dir).exists()) {
     new File(params.out_dir).mkdirs()
 }
 
-// Create channels for inputs
-tumor_list = Channel.fromPath(params.tumor)
-normal_list = Channel.fromPath(params.normal)
-reference = Channel.fromPath(params.reference)
-
-
-
-def tumor_input = file(params.tumor, stageAs:"tumor_path")
-def normal_input = file(params.normal, stageAs:"normals_path")
-def ref_input = file(params.reference, stageAs:"reference_path")
-
-
-def tumor_basename = file(params.tumor).getBaseName()
-def normal_basename = file(params.normal)getBaseName()
-def ref_basename = file(params.reference).getBaseName()
-
-def tumor_dirname = file(params.tumor).parent 
-def normal_dirname = file(params.normal).parent 
-def ref_dirname = file(params.reference).parent 
-
-
-def nanofrag_dir = file(params.nanofrag).parent
-
-
-def tumor_input_str = params.tumor.replaceAll("\\s", "\\ ")
-def normal_input_str = params.normal.replaceAll("\\s", "\\ ")
-def ref_input_str = params.reference.replaceAll("\\s", "\\ ")
+// Create input channels
+tumor_dir = file(params.tumor)
+normal_dir = file(params.normal)
+reference_file = file(params.reference)
 
 process runNanofrag {
     tag "nanofrag"
@@ -71,31 +48,41 @@ process runNanofrag {
     cpus params.threads
 
     input:
-    // path tumor_list
-    // path normal_list
-    // path reference
+    path tumor_dir
+    path normal_dir
+    path reference_file
 
     output:
+    path "${params.out_dir}/*"
 
     script:
     """
-    echo "Running Nanofrag using docker run command..."
-    docker run  -i --rm \\
-        -v ${nanofrag_dir}/:/nanofrag_script/ \\
-        -v ${tumor_input_str}/:/tumors/ \\
-        -v ${normal_input_str}/:/normals/ \\
-        -v ${ref_input_str}/:/ref_dir/\\
+    echo "Running Nanofrag using the updated Docker container (bdolmo/nanofrag)..."
+    docker run -i --rm \\
+        -v ${tumor_dir}:/tumors/ \\
+        -v ${normal_dir}:/normals/ \\
+        -v ${reference_file.parent}:/ref_dir/ \\
         -v ${params.out_dir}:/out_dir/ \\
-        bdolmo/python_env_nanofrag:latest /nanofrag_script/nanofrag.py \\
-        --docker_output ${params.out_dir} \\
+        bdolmo/nanofrag:latest python3.12 nanofrag.py \\
+        --docker_output /out_dir/ \\
         --tumor_list /tumors/ \\
         --normal_list /normals/ \\
-        --reference /ref_dir/ \\
+        --reference /ref_dir/${reference_file.getName()} \\
         --output_dir /out_dir/ \\
         --threads ${task.cpus} \\
         ${params.skip_small_variants ? '--skip_small_variants' : ''}
     """
 }
+
+// Workflow definition
+workflow {
+    runNanofrag()
+}
+
+workflow.onComplete {
+    println "Nanofrag analysis completed successfully. Results are saved in '${params.out_dir}'."
+}
+
 
 
 // process runNanofrag {
