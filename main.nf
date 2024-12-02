@@ -46,25 +46,24 @@ process runNanofrag {
     tag "nanofrag"
     memory '12 GB'
     cpus params.threads
+    container 'bdolmo/nanofrag:latest'  // Use Nextflow Docker integration
 
     input:
+    path tumor_dir
+    path normal_dir
+    path reference_file
 
     output:
+    path "${params.out_dir}/*"
 
     script:
     """
-    echo "Running Nanofrag using the updated Docker container (bdolmo/nanofrag)..."
-    docker run -i --rm \\
-        -v ${tumor_dir}:/tumors/ \\
-        -v ${normal_dir}:/normals/ \\
-        -v ${reference_file.parent}:/ref_dir/ \\
-        -v ${params.out_dir}:/out_dir/ \\
-        bdolmo/nanofrag:latest python3.12 nanofrag.py \\
-        --docker_output /out_dir/ \\
-        --tumor_list /tumors/ \\
-        --normal_list /normals/ \\
-        --reference /ref_dir/${reference_file.getName()} \\
-        --output_dir /out_dir/ \\
+    python3.12 /nanofrag.py \\
+        --docker_output ${params.out_dir} \\
+        --tumor_list ${tumor_dir} \\
+        --normal_list ${normal_dir} \\
+        --reference ${reference_file} \\
+        --output_dir ${params.out_dir} \\
         --threads ${task.cpus} \\
         ${params.skip_small_variants ? '--skip_small_variants' : ''}
     """
