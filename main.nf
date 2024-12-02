@@ -116,15 +116,6 @@ workflow.onComplete {
 // }
 
 // Workflow definition
-workflow {
-    runNanofrag()
-}
-
-workflow.onComplete {
-    println "Nanofrag analysis completed successfully. Results are saved in '${params.out_dir}'."
-}
-
-
 
 
 // process fragmentExtractor {
