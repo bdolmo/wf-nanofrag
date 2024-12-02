@@ -141,4 +141,3 @@ workflow.onComplete {
 // workflow.onComplete {
 //     println "Workflow execution completed successfully. Fragmentation metrics are saved in the '${params.out_dir}' directory."
 // }
-
