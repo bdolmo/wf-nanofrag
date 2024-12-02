@@ -49,12 +49,9 @@ process runNanofrag {
     container 'bdolmo/nanofrag:latest'  // Use Nextflow Docker integration
 
     input:
-    path tumor_dir
-    path normal_dir
-    path reference_file
+
 
     output:
-    path "${params.out_dir}/*"
 
     script:
     """
