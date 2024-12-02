@@ -62,6 +62,7 @@ process runNanofrag {
         --reference ${reference_file} \\
         --output_dir ${params.out_dir} \\
         --threads ${task.cpus} \\
+	--skip_cn \\
         ${params.skip_small_variants ? '--skip_small_variants' : ''}
     """
 }
