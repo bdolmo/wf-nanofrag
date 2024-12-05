@@ -38,17 +38,24 @@ if (!new File(params.out_dir).exists()) {
 }
 
 // Create input channels
-tumor_dir = file(params.tumor)
-normal_dir = file(params.normal)
-reference_file = file(params.reference)
+tumor_dir = params.tumor
+normal_dir = params.normal
+reference_file = params.reference
+reference_fai = params.reference + ".fai"
+
+println(reference_file)
 
 process runNanofrag {
     tag "nanofrag"
-    memory '12 GB'
+    memory '15 GB'
     cpus params.threads
     container 'bdolmo/nanofrag:latest'  // Use Nextflow Docker integration
 
     input:
+    path tumor_dir
+    path normal_dir
+    path reference_file
+    path reference_fai
 
 
     output:
@@ -69,7 +76,7 @@ process runNanofrag {
 
 // Workflow definition
 workflow {
-    runNanofrag()
+    runNanofrag(tumor_dir, normal_dir, reference_file, reference_fai)
 }
 
 workflow.onComplete {
