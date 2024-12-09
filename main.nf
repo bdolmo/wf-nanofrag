@@ -42,6 +42,7 @@ tumor_dir = params.tumor
 normal_dir = params.normal
 reference_file = params.reference
 reference_fai = params.reference + ".fai"
+output_dir = params.out_dir
 
 println(reference_file)
 
@@ -56,6 +57,7 @@ process runNanofrag {
     path normal_dir
     path reference_file
     path reference_fai
+    path output_dir
 
 
     output:
@@ -63,20 +65,19 @@ process runNanofrag {
     script:
     """
     python3.12 /opt/nanofrag/nanofrag.py \\
-        --docker_output ${params.out_dir} \\
+        --docker_output ${output_dir} \\
         --tumor_list ${tumor_dir} \\
         --normal_list ${normal_dir} \\
         --reference ${reference_file} \\
-        --output_dir ${params.out_dir} \\
+        --output_dir ${output_dir} \\
         --threads ${task.cpus} \\
-	--skip_cn \\
         ${params.skip_small_variants ? '--skip_small_variants' : ''}
     """
 }
 
 // Workflow definition
 workflow {
-    runNanofrag(tumor_dir, normal_dir, reference_file, reference_fai)
+    runNanofrag(tumor_dir, normal_dir, reference_file, reference_fai, output_dir)
 }
 
 workflow.onComplete {

@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	a8/def7fd	25841	runNanofrag (nanofrag)	FAILED	1	2024-12-08 20:38:36.873	6m 11s	6m 11s	-	-	-	-	-
