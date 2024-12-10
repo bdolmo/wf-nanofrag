@@ -32,9 +32,17 @@
                     "title": "Reference Genome",
                     "description": "Path to the reference genome file in FASTA format.",
                     "help_text": "Provide the reference genome file."
+                },
+                "out_dir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "title": "Output directory",
+                    "description": "Path to the reference genome file in FASTA format.",
+                    "help_text": "Provide the reference genome file."
                 }
+
             },
-            "required": ["tumor", "normal", "reference"]
+            "required": ["tumor", "normal", "reference", "out_dir"]
         },
         "output": {
             "title": "Output Options",

@@ -28,8 +28,8 @@ if (params.help) {
 }
 
 // Ensure mandatory parameters are provided
-if (!params.tumor || !params.normal || !params.reference) {
-    throw new IllegalArgumentException("Missing required parameters: --tumor, --normal, or --reference")
+if (!params.tumor || !params.normal || !params.reference || !params.out_dir) {
+    throw new IllegalArgumentException("Missing required parameters: --tumor, --normal, --reference, or --out_dir ")
 }
 
 // Ensure the output directory exists
